@@ -40,7 +40,7 @@ void iniciar() {
     // Declaração de variáveis necessárias para o funcionamento do sistema
     infoVoo airBus[50];
     long int idCliente;
-    int numeroVoo;
+    int nVoo;
 
     // Inicializa variavel para carregar menu
     char opcao;
@@ -58,9 +58,10 @@ void iniciar() {
 			    printf("Digite somente os numeros da sua identidade:\n");
 			    scanf("%li", &idCliente);
 			    printf("\nAgora digite o numero do voo:\n");
-			    scanf("%d", &numeroVoo);
+			    scanf("%d", &nVoo);
 				printf("Incluindo reserva...");
-				incluirReserva(airBus, idCliente, numeroVoo);
+				incluirReserva(airBus, idCliente, nVoo);
+				clearBuffer(opcao);
 				break;
 			case 'c':
 				printf("Excluindo reserva...");
@@ -93,11 +94,11 @@ int inicializarDados(infoVoo airBus[50]){
 }
 
 //-- Incluir reserva
-int incluirReserva(infoVoo airBus[50],int idCliente, int numeroVoo) {
+int incluirReserva(infoVoo airBus[50],int idCliente, int nVoo) {
     int i, j;
 
     for (i = 0; i < 50; i++) {
-        if (numeroVoo == airBus[i].numeroVoo) {
+        if (nVoo == airBus[i].numeroVoo) {
             if (airBus[i].capacidade == 10) {
                 return 1;
             }
@@ -111,8 +112,14 @@ int incluirReserva(infoVoo airBus[50],int idCliente, int numeroVoo) {
                     }
                 }
             }
+             printf("Reserva incluida com sucesso!");
         }
+        else{
+            printf("Numero do voo nao encontrado, digite novamente.");
+        }
+
     }
+
     return 0;
 }
 
@@ -130,6 +137,11 @@ int excluirReserva(infoVoo airBus[50],int idCliente,int numeroVoo) {
                 }
             }
             return 1;
+            printf("Reserva excluida com sucesso!");
+        }
+
+        else{
+            printf("Numero do voo nao encontrado, digite novamente.");
         }
     }
     return 0;
