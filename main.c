@@ -14,10 +14,6 @@ typedef struct {
     int numeroVoo;
 } infoVoo;
 
-infoVoo airBus[50];
-long int idCliente;
-
-
 // -- Funções para controle de fluxo principal
 char getOpcao() {
 	char ch;
@@ -41,8 +37,13 @@ void clearBuffer(char c) {
 }
 
 void iniciar() {
-	// Inicializa variavel para carregar menu
-	char opcao;
+    // Declaração de variáveis necessárias para o funcionamento do sistema
+    infoVoo airBus[50];
+    long int idCliente;
+    int numeroVoo;
+
+    // Inicializa variavel para carregar menu
+    char opcao;
 
 	while (opcao != 's') {
 		opcao = getOpcao();
@@ -51,7 +52,7 @@ void iniciar() {
 		switch (opcao) {
 			case 'a':
 				printf("Inicializando dados...");
-                inicializarDados();
+                inicializarDados(airBus);
 				break;
 			case 'b':
 			    printf("Digite somente os numeros da sua identidade:\n");
@@ -79,22 +80,20 @@ void iniciar() {
 }
 
 //-- Inicializar dados
-int inicializarDados (infoVoo airBus[50]){
-
+int inicializarDados(infoVoo airBus[50]){
     int i, j , n = 1000;
 
-    for(i = 0; i < 50; i++){
+    for(i = 0; i < 50; i++) {
         airBus[i].capacidade = 10;
         airBus[i].numeroVoo = n;
-        n++
+        n++;
     }
 
     printf("\nDados inicializados com sucesso!\n");
-
 }
 
 //-- Incluir reserva
-int incluirReserva (infoVoo airBus[50],int idCliente, int numeroVoo) {
+int incluirReserva(infoVoo airBus[50],int idCliente, int numeroVoo) {
     int i, j;
 
     for (i = 0; i < 50; i++) {
