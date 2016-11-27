@@ -14,6 +14,10 @@ typedef struct {
     int numeroVoo;
 } infoVoo;
 
+infoVoo airBus[50];
+long int idCliente;
+
+
 // -- Funções para controle de fluxo principal
 char getOpcao() {
 	char ch;
@@ -47,9 +51,15 @@ void iniciar() {
 		switch (opcao) {
 			case 'a':
 				printf("Inicializando dados...");
+                inicializarDados();
 				break;
 			case 'b':
+			    printf("Digite somente os numeros da sua identidade:\n");
+			    scanf("%li", &idCliente);
+			    printf("\nAgora digite o numero do voo:\n");
+			    scanf("%d", &numeroVoo);
 				printf("Incluindo reserva...");
+				incluirReserva(airBus, idCliente, numeroVoo);
 				break;
 			case 'c':
 				printf("Excluindo reserva...");
@@ -69,6 +79,19 @@ void iniciar() {
 }
 
 //-- Inicializar dados
+int inicializarDados (infoVoo airBus[50]){
+
+    int i, j , n = 1000;
+
+    for(i = 0; i < 50; i++){
+        airBus[i].capacidade = 10;
+        airBus[i].numeroVoo = n;
+        n++
+    }
+
+    printf("\nDados inicializados com sucesso!\n");
+
+}
 
 //-- Incluir reserva
 int incluirReserva (infoVoo airBus[50],int idCliente, int numeroVoo) {
@@ -95,15 +118,15 @@ int incluirReserva (infoVoo airBus[50],int idCliente, int numeroVoo) {
 }
 
 //-- Excluir reserva
-int excluirReserva(infoVoo a[50],int idCliente,int numeroVoo) {
+int excluirReserva(infoVoo airBus[50],int idCliente,int numeroVoo) {
     int i, j;
     for(i=0;i<50; i++) {
-        if(numeroVoo==a[i].numeroVoo) {
+        if(numeroVoo==airBus[i].numeroVoo) {
             for(j=0; j<10; j++) {
-                if (idCliente==a[i].poltrona[i].infoPassageiro) {
-                    a[i].poltrona[j].infoPassageiro=0;
-                    a[i].capacidade--;
-                    a[i].poltrona[j].estadoAssento=0;
+                if (idCliente==airBus[i].poltrona[i].infoPassageiro) {
+                    airBus[i].poltrona[j].infoPassageiro=0;
+                    airBus[i].capacidade--;
+                    airBus[i].poltrona[j].estadoAssento=0;
                     return 2;
                 }
             }
@@ -114,19 +137,19 @@ int excluirReserva(infoVoo a[50],int idCliente,int numeroVoo) {
 }
 
 //-- Imprimir reserva
-void imprimirReserva(infoVoo a[50],int opcao,int numeroVoo) {
+void imprimirReserva(infoVoo airBus[50],int opcao,int numeroVoo) {
     int i,j;
     int vooInexistente = 1;
     switch (opcao) {
     case 1:
         printf("Numero do voo: %d\n",numeroVoo);
         for ( i=0; i<50; i++) {
-            if (numeroVoo==a[i].numeroVoo) {
+            if (numeroVoo==airBus[i].numeroVoo) {
                 vooInexistente=0;
-                printf("Numero de reservas do voo: %d\n",a[i].capacidade);
+                printf("Numero de reservas do voo: %d\n",airBus[i].capacidade);
                 for ( j=0; j<10; j++) {
-                    if (a[i].poltrona[j].estadoAssento==1) {
-                        printf("%li\n",a[i].poltrona[j].infoPassageiro);
+                    if (airBus[i].poltrona[j].estadoAssento==1) {
+                        printf("%li\n",airBus[i].poltrona[j].infoPassageiro);
                     }
                 }
             }
@@ -138,9 +161,9 @@ void imprimirReserva(infoVoo a[50],int opcao,int numeroVoo) {
 
     case 2:
         for ( i=0; i<50; i++) {
-            if (numeroVoo==a[i].numeroVoo) {
+            if (numeroVoo==airBus[i].numeroVoo) {
                 vooInexistente=0;
-                printf("Numero do voo: %d Reservas: %d\n",a[i].numeroVoo,a[i].capacidade);
+                printf("Numero do voo: %d Reservas: %d\n",airBus[i].numeroVoo,airBus[i].capacidade);
             }
         }
         if (vooInexistente==1) {
@@ -150,13 +173,13 @@ void imprimirReserva(infoVoo a[50],int opcao,int numeroVoo) {
 
     case 3:
         for ( i=0; i<50; i++) {
-            if (numeroVoo==a[i].numeroVoo) {
+            if (numeroVoo==airBus[i].numeroVoo) {
                 vooInexistente=0;
-                printf("Numero do voo: %d\n",a[i].numeroVoo);
-                printf("Numero de reservas no voo: %d\n",a[i].capacidade);
+                printf("Numero do voo: %d\n",airBus[i].numeroVoo);
+                printf("Numero de reservas no voo: %d\n",airBus[i].capacidade);
                 for ( j=0; j<10; j++) {
-                    if (a[i].poltrona[j].estadoAssento==1) {
-                        printf("%li\n",a[i].poltrona[j].infoPassageiro);
+                    if (airBus[i].poltrona[j].estadoAssento==1) {
+                        printf("%li\n",airBus[i].poltrona[j].infoPassageiro);
                     }
                 }
             }
