@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-
 //*Os parâmetros que são recebido é uma array de 50 de struct InfoVoo, que engloba o struct infoAssento, identidade *//
-typedef struct infoAssento {
+typedef struct {
     int estadoAssento;
-    long int;
-} infoPassageiro;
+    long int infoPassageiro;
+} infoAssento ;
 
 typedef struct {
     int capacidade;
@@ -15,6 +14,7 @@ typedef struct {
 
 int excluirReserva(infoVoo a[50],int idCliente,int numeroVoo) {
     int i, j;
+    
     for(i=0;i<50; i++) {
         if(numeroVoo==a[i].numeroVoo) {
             for(j=0; j<10; j++) {
