@@ -12,7 +12,7 @@ typedef struct {
     int numeroVoo;
 } infoVoo;
 
-int incluirReserva (infoVoo airBus[50], *idCliente, int numeroVoo) {
+int incluirReserva (infoVoo airBus[50], int idCliente, int numeroVoo) {
     for (i = 0; i < 50; i++) {
         if (numeroVoo == airBus[i].numeroVoo) {
             if (airBus[i].capacidade == 10) {
