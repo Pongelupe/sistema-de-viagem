@@ -66,7 +66,7 @@ void iniciar() {
 
     // Variáveis de menu
     char opcaoPrincipal;
-    int opcaoImprimir;
+    int opcaoImprimir, resultadoIncluir;
 
 	while (opcaoPrincipal != 's') {
 		opcaoPrincipal = getOpcaoPrincipal();
@@ -82,7 +82,19 @@ void iniciar() {
 			    scanf("%li", &idCliente);
 			    nVoo = getNumeroVoo();
 				printf("Incluindo reserva...");
-				incluirReserva(airBus, idCliente, nVoo);
+
+				resultadoIncluir = incluirReserva(airBus, idCliente, nVoo);
+                switch (resultadoIncluir) {
+                    case 0:
+                        printf("Voo nao existe");
+                        break;
+                    case 1:
+                        printf("Voo lotado");
+                        break;
+                    case 2: 
+                        printf("Inclusao realizada com sucesso");
+                        break;
+                }
 				clearBuffer(opcaoPrincipal);
 				break;
 			case 'c':
@@ -137,12 +149,7 @@ int incluirReserva(infoVoo airBus[50], int idCliente, int nVoo) {
                     }
                 }
             }
-            printf("\nReserva incluida com sucesso!");
         }
-        else{
-            printf("\nNumero do voo nao encontrado, digite novamente.");
-        }
-
     }
 
     return 0;
