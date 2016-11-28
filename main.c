@@ -59,10 +59,20 @@ int getNumeroVoo()
 {
     int numeroVoo;
 
-    printf("\nNumero do voo: ");
+    printf("Numero do voo: ");
     scanf("%d", &numeroVoo);
 
     return numeroVoo;
+}
+
+int getIdUsuario() 
+{
+    long int idUsuario;
+
+    printf("Digite somente os numeros da sua identidade: ");
+    scanf("%li", &idUsuario);
+
+    return idUsuario;
 }
 
 void iniciar()
@@ -88,10 +98,8 @@ void iniciar()
             inicializarDados(airBus);
             break;
         case 'b':
-            printf("Digite somente os numeros da sua identidade: ");
-            scanf("%li", &idCliente);
+            idCliente = getIdUsuario();
             nVoo = getNumeroVoo();
-            printf("Incluindo reserva...\n");
 
             resultadoIncluir = incluirReserva(airBus, idCliente, nVoo);
             switch (resultadoIncluir)
@@ -109,8 +117,7 @@ void iniciar()
             clearBuffer(opcaoPrincipal);
             break;
         case 'c':
-            printf("Digite somente os numeros da sua identidade: ");
-            scanf("%li", &idCliente);
+            idCliente = getIdUsuario();
             nVoo = getNumeroVoo();
             printf("Excluindo reserva...\n");
 
@@ -121,7 +128,7 @@ void iniciar()
                 printf("Voo nao existe.");
                 break;
             case 1:
-                printf("Nao existe reservas nesse voo.");
+                printf("Passageiro inexistente no voo.");
                 break;
             case 2:
                 printf("Exclusao realizada com sucesso.");
@@ -131,27 +138,16 @@ void iniciar()
             break;
         case 'd':
             resultadoImprimir = getOpcaoImprimir();
-            switch (resultadoImprimir)
-            {
-            case 1:
-                nVoo = getNumeroVoo();
-                imprimirReserva(airBus, resultadoImprimir, nVoo);
-                break;
-            case 2:
-                nVoo = getNumeroVoo();
-                imprimirReserva(airBus, resultadoImprimir, nVoo);
-                break;
-            case 3:
-                imprimirReservaToda(airBus);
-                break;
-            }
+            nVoo = getNumeroVoo();
+            
+            imprimirReserva(airBus, resultadoImprimir, nVoo);
+            
             clearBuffer(opcaoPrincipal);
             break;
         case 's':
             printf("Encerrando...");
             break;
         default:
-            printf("\n-- Digitado: %c\n", opcaoPrincipal);
             printf("A opcao selecionada e invalida, digite novamente");
             break;
         }
@@ -253,7 +249,7 @@ void imprimirReserva(infoVoo airBus[50], int opcao, int numeroVoo)
                 {
                     if (airBus[i].poltrona[j].estadoAssento==1)
                     {
-                        printf("%li\n",airBus[i].poltrona[j].infoPassageiro);
+                        printf("Cliente: %li\n",airBus[i].poltrona[j].infoPassageiro);
                     }
                 }
             }
@@ -270,7 +266,7 @@ void imprimirReserva(infoVoo airBus[50], int opcao, int numeroVoo)
             if (numeroVoo==airBus[i].numeroVoo)
             {
                 vooInexistente=0;
-                printf("Numero do voo: %d Reservas: %d\n",airBus[i].numeroVoo,airBus[i].capacidade);
+                printf("Reservas do voo %d: %d\n", airBus[i].numeroVoo, airBus[i].capacidade);
             }
         }
         if (vooInexistente==1)
@@ -282,7 +278,7 @@ void imprimirReserva(infoVoo airBus[50], int opcao, int numeroVoo)
     case 3:
         for ( i=0; i<50; i++)
         {
-            if (airBus[i].capacidade != 10)
+            if (airBus[i].capacidade != 0)
             {
                 vooInexistente=0;
                 printf("\nNumero do voo: %d\n",airBus[i].numeroVoo);
@@ -291,43 +287,16 @@ void imprimirReserva(infoVoo airBus[50], int opcao, int numeroVoo)
                 {
                     if (airBus[i].poltrona[j].estadoAssento==1)
                     {
-                        printf("%li\n",airBus[i].poltrona[j].infoPassageiro);
+                        printf("Cliente: %li\n",airBus[i].poltrona[j].infoPassageiro);
                     }
                 }
             }
         }
         if (vooInexistente==1)
         {
-            printf("Numero de voo inexistente\n");
+            printf("Nao existe nenhuma reserva para nenhum voo.");
         }
         break;
-    }
-}
-
-//-- Imprimir todas as reservas de todos os vôos.
-void imprimirReservaToda(infoVoo airBus[50])
-{
-    int i,j;
-    int vooInexistente = 1;
-    for ( i=0; i<50; i++)
-    {
-        if (airBus[i].capacidade != 0)
-        {
-            vooInexistente=0;
-            printf("\nNumero do voo: %d\n",airBus[i].numeroVoo);
-            printf("Numero de reservas no voo: %d\n",airBus[i].capacidade);
-            for ( j=0; j<10; j++)
-            {
-                if (airBus[i].poltrona[j].estadoAssento==1)
-                {
-                    printf("%li\n",airBus[i].poltrona[j].infoPassageiro);
-                }
-            }
-        }
-    }
-    if (vooInexistente==1)
-    {
-        printf("Nao existe nenhuma reserva para nenhum voo.");
     }
 }
 
