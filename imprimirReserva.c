@@ -30,7 +30,7 @@ void imprimirReserva(infoVoo a[50],int opcao,int numeroVoo)
                 {
                     if (a[i].poltrona[j].estadoAssento==1)
                     {
-                        printf("%li\n",a[i].poltrona[j].infoPassageiro);
+                        printf("%li \n",a[i].poltrona[j].infoPassageiro);
                     }
                 }
             }
@@ -47,7 +47,7 @@ void imprimirReserva(infoVoo a[50],int opcao,int numeroVoo)
             if (numeroVoo==a[i].numeroVoo)
             {
                 vooInexistente=0;
-                printf("Numero do voo: %d Reservas: %d\n",a[i].numeroVoo,a[i].capacidade);
+                printf("\nNumero do voo: %d \nReservas: %d\n",a[i].numeroVoo,a[i].capacidade);
             }
         }
         if (vooInexistente==1)

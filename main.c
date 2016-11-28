@@ -65,7 +65,7 @@ int getNumeroVoo()
     return numeroVoo;
 }
 
-int getIdUsuario() 
+int getIdUsuario()
 {
     long int idUsuario;
 
@@ -139,9 +139,9 @@ void iniciar()
         case 'd':
             resultadoImprimir = getOpcaoImprimir();
             nVoo = getNumeroVoo();
-            
+
             imprimirReserva(airBus, resultadoImprimir, nVoo);
-            
+
             clearBuffer(opcaoPrincipal);
             break;
         case 's':
@@ -216,7 +216,7 @@ int excluirReserva(infoVoo airBus[50],int idCliente,int nVoo)
         {
             for(j=0; j<10; j++)
             {
-                if (idCliente==airBus[i].poltrona[i].infoPassageiro)
+                if (idCliente==airBus[i].poltrona[j].infoPassageiro)
                 {
                     airBus[i].poltrona[j].infoPassageiro=0;
                     airBus[i].capacidade--;
